@@ -36,7 +36,7 @@
         <h1>!Bienvenid@ a nuestro formulario!</h1>
         <p>¡En el siguiente formulario podrás revisar el porcentaje de compatibilidad entre tu grado académico/universidad y las 2 mejores universidades de nuestro país!</p>
 
-        <form action="">
+        <form action="" id="formulario">
             <div id="check1" >
                 <h4>Para comenzar ... Eres:</h4>
                 <div class="form-check">
@@ -54,13 +54,13 @@
             </div>
             <div class="input-group" id="campos--form">
                 <span class="input-group-text" id="Fullname">Nombre Completo</span>
-                <input type="text" aria-label="First name" class="form-control">
-                <input type="text" aria-label="Last name" class="form-control">
+                <input type="text" aria-label="First name" class="form-control" id="nombre">
+                <input type="text" aria-label="Last name" class="form-control" id="apellido">
             </div>
 
             <div class="input-group flex-nowrap" id="campos--form">
                 <span class="input-group-text" id="addon-wrapping">@</span>
-                <input type="text" class="form-control" placeholder="Email" aria-label="Username" aria-describedby="addon-wrapping">
+                <input type="text" class="form-control" placeholder="Email" aria-label="Username" aria-describedby="addon-wrapping" id="email">
             </div>
 
             <div class="input-group mb-3" id="campos--form">
@@ -70,37 +70,41 @@
 
             <div class="input-group mb-3" id="campos--form">
                 <span class="input-group-text" id="inputGroup-sizing-default">Horas totales programa de origen:</span>
-                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="hrsTotales">
             </div>
 
             <h4 id="campos--form">Selecciona la universidad para la que buscas información:</h4>
             <select class="form-select" aria-label="Default select example" id="Uni1">
                 <option selected>Seleccionar universidad...</option>
                 <option value="1">Universidad de Chile</option>
-                <option value="3">Universidad Católica de Chile</option>
+                <option value="2">Universidad Católica de Chile</option>
             </select>
 
             <h4 id="campos--form">Selecciona la universidad desde la que postulas:</h4>
             <select class="form-select" aria-label="Default select example" id="Uni2">
                 <option selected>Seleccionar universidad...</option>
                 <option value="1">Universidad de Santo Cielo</option>
-                <option value="3">Universidad Mar Azul</option>
+                <option value="2">Universidad Mar Azul</option>
             </select>
 
             <h4 id="campos--form">Selecciona la carrera para la que buscas información:</h4>
             <select class="form-select" aria-label="Default select example" id="Carrer">
                 <option selected>Seleccionar carrera...</option>
-                <option selected>Contador Auditor</option>
-                <option selected>Ingeniería Comercial</option>
+                <option value="1">Contador Auditor</option>
+                <option value="2">Ingeniería Comercial</option>
             </select>
 
             <button type="button" onclick="comparacion(u1,u2,c)"  class="btn btn-outline-success" id="boton">Consultar</button>
+        
+
+        
         </form>
     </main>
 
     <footer>
 
     </footer>
+    <script src="./index.js"></script>
 </body>
 
 <script src="./index.js"></script>
