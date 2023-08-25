@@ -1,102 +1,108 @@
 // DATOS PARA COMPARAR
 const Ucl = {
-    universidad1: 'Universidad de Chile',
-    carrera: ['Contador Auditor','Ingeniería Comercial'],
-    hrs1: [4999,5234],
-    universidad2: 'Universidad Católica de Chile',
-    hrs2: [4698,5163],
-}
+  universidad1: 'Universidad de Chile',
+  // carrera: ['Contador Auditor','Ingeniería Comercial'],
+  hrs1: [4999, 5234],
+  universidad2: 'Universidad Católica de Chile',
+  hrs2: [4698, 5163],
+};
+
+const ucl_new = {
+  'Universidad de Chile': {
+    "Contador Auditor": 4999,
+    "Ingeniería Comercial": 5234
+  },
+  'Universidad Católica de Chile': {
+    "Contador Auditor": 4698,
+    "Ingeniería Comercial": 5163,
+  }
+};
+
+const uex_new = {
+  'Universidad de Santo Cielo': {
+    "Contador Auditor": 1800,
+    "Ingeniería Comercial": 5010
+  },
+  'Universidad Mar Azul': {
+    "Contador Auditor": 3500,
+    "Ingeniería Comercial": 2230,
+  }
+};
 
 const Uex = {
-    universidad1:'Universidad de Santo Cielo',
-    universidad2:'Universidad Mar Azul',
-    hrsSC: [1800,5010],
-    hrsMA: [3500,2230],
-}
+  universidad1: 'Universidad de Santo Cielo',
+  universidad2: 'Universidad Mar Azul',
+  hrsSC: [1800, 5010],
+  hrsMA: [3500, 2230],
+};
 
 // FUNCIÓN QUE CALCULA EL PORCENTAJE DE SIMILITUD
-function diferencia(hrs1,hrs2){
-    let diferencia= (hrs2-hrs1)/hrs2*100
-    return Math.round(diferencia)
+function diferencia(hrs1, hrs2) {
+  let diferencia = (hrs2 - hrs1) / hrs2 * 100
+  return Math.round(diferencia)
+};
+
+// // FUNCIÓN QUE OBTIENE Y COMPARA LOS VALORES DE ACUERDO A LO ENTREGADO POR EL USUARIO
+
+function comparacion(universidad1, universidad2, carrera) {
+  const hrs1 = uex_new[universidad1][carrera];
+  const hrs2 = ucl_new[universidad2][carrera];
+  return ("Las carreras tienen un " + diferencia(hrs1, hrs2)) + "% de similitud";
+
+};
+
+
+// OBTENCIÓN DE DATOS DESDE EL FORMULARIO
+
+const $form = document.querySelector('#formulario')
+
+$form.addEventListener('submit', handleSubmit)
+
+function handleSubmit(event) {
+  event.preventDefault()
+  const form = new FormData(this)
+  nombre = form.get('name')
+  apellido = form.get('apellido')
+  correo = form.get('email')
+  hrs = form.get('hrsPrograma')
+  opcion1 = form.get('U1')
+  opcion2 = form.get('U2')
+  carrera = form.get('carrera')
+
+
+  respuesta = comparacion(opcion2, opcion1, carrera)
+  resultado.innerHTML = '<h2>' + respuesta + '</h2>'
+
+  // Generación JSON y almacenamiento en local storage 
+  const almacenar = {
+    Nombre: nombre,
+    Apellido: apellido,
+    email: email,
+  }
+
+  const enJSON = JSON.stringify(almacenar);
+  localStorage.setItem("Consultante", enJSON);
 }
 
-// FUNCIÓN QUE OBTIENE Y COMPARA LOS VALORES DE ACUERDO A LO ENTREGADO POR EL USUARIO
-function comparacion(universidad1,universidad2,carrera){
-    if (universidad1== Ucl.universidad1 && universidad2==Uex.universidad1){
-        if (carrera=='Contador Auditor'){
-            console.log("Las carreras tienen un "+ diferencia(Uex.hrsSC[0],Ucl.hrs1[0]) + "% de similitud")} else{
-                console.log("Las carreras tienen un "+ diferencia(Uex.hrsSC[1],Ucl.hrs1[1]) + " de similitud")
-            }
-    } else if (universidad1==Ucl.universidad1 && universidad2==Uex.universidad2){
-        if (carrera=='Contador Auditor'){
-            console.log("Las carreras tienen un "+ diferencia(Uex.hrsMA[0],Ucl.hrs1[0]) + "% de similitud")} else{
-                console.log("Las carreras tienen un "+ diferencia(Uex.hrsMA[1],Ucl.hrs1[1]) + "% de similitud")
-            }
-    } else if (universidad1==Ucl.universidad2 && universidad2==Uex.universidad1){
-        if (carrera=='Contador Auditor'){
-            console.log("Las carreras tienen un "+ diferencia(Uex.hrsSC[0],Ucl.hrs2[0]) + "% de similitud")} else{
-                console.log("Las carreras tienen un "+ diferencia(Uex.hrsSC[1],Ucl.hrs2[1]) + "% de similitud")
-            }
-    } else{
-        if (carrera=='Contador Auditor'){
-            console.log("Las carreras tienen un "+ diferencia(Uex.hrsMA[0],Ucl.hrs2[0]) + "% de similitud")} else{
-                console.log("Las carreras tienen un "+ diferencia(Uex.hrsMA[1],Ucl.hrs2[1]) + "% de similitud")
-            }
-    }
-}
+// LO DEL FETCH LO DEJO EN COMENTARIOS PORQUE NO TIENE SENTIDO DENTRO DE MI PLATAFORMA, PERO INTENTÉ APLICARLO IGUALMENTE
 
+// fetch('./db.json')
+//   .then((data) =>
+//     data
+//       .json()
+//       .then((res) => {console.log(res)})
+//       .catch((e) => console.log('Hubo un error'))
+//   )
 
-// let u1= prompt("Ingrese alguna de las siguientes universidades [ Universidad de Chile, Universidad Católica de Chile]:");
-// let u2= prompt("Ingrese alguna de las siguientes universidades [ Universidad de Santo Cielo, Universidad Mar Azul]:");
-// let c= prompt("Ingrese alguna de las siguientes carreras [ Ingeniería Comercial, Contador Auditor]:");
-// let n=0;
-// let x=0;
+//   .catch((e) => console.log(e));
 
-while(n < 4){
-    n++;
-    console.log(comparacion(u1,u2,c));
-    x+=n;
-}
-// // alert("Revisa el resultado en la consola!")
+//   let respuesta = res;
 
-// // OBTENCIÓN DE DATOS DESDE EL FORMULARIO
+//   console.log(respuesta)
 
-// // Hrs totales programa
-let hrsTotales = document.getElementById("hrsTotales").value;
+  // const div= document.createElement('div');
+  // div.className= 'otros';
 
-// // U para la que se busca info
-let select_Ubuscada = document.getElementById("Uni1");
-let selec1 = select_Ubuscada.options[select_Ubuscada.selectedIndex].text;
-
-// // U desde la que postula
-let select_Upostula = document.getElementById("Uni2");
-let selec2 = select_Upostula.options[select_Upostula.selectedIndex].text;
-
-// // Carrera buscada
-let select_Ucarrera = document.getElementById("Uni1");
-let selec3 = select_Ucarrera.options[select_Ucarrera.selectedIndex].text;
-
-// // ALMACENAMIENTO INFO RELEVANTE EN LOCAL STORAGE
-
-// // Nombre completo
-let nombre = document.getElementById("nombre").value;
-let apellido = document.getElementById("apellido").value;
-let email = document.getElementById("email").value;
-
-// // almacenamiento en local storage
-localStorage.setItem('nombre', nombre);
-localStorage.setItem('apellido', apellido);
-localStorage.setItem('email', email);
-
-const form = document.getElementById("formulario");
-
-form.addEventListener('submit', (e) =>{
-    e.preventDefault();
-    const usuario = {
-        nombres= e.target[0].value;
-        apellidos= e.target[1].value;
-        emails= e.target[2].value;
-    };
-
-    localStorage.setItem('usuario', JSON.stringify(usuario));
-}
+  // const innerDiv= document.createElement('div');
+  // innerDiv.className = 'persona';
+  // innerDiv.innerHTML = '<h3>${respuesta.nombre}<h3>';

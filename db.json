@@ -1,0 +1,7 @@
+[
+    { "nombre": "Juanita", "similitud": 32, "id": 1 },
+    { "nombre": "Pepita", "similitud": 61, "id": 2 },
+    { "nombre": "Teresa", "similitud": 36, "id": 3 },
+    { "nombre": "Marcelo", "similitud": 45, "id": 4 },
+    { "nombre": "Nicolas", "similitud": 55, "id": 5 }
+  ]
